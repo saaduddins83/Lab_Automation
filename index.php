@@ -34,15 +34,15 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <title>SRS Electrical Appliances</title>
-   
+
 </head>
 
 <body>
-<?php
-include ("./include/sidebar.php");
-include ("./include/main.php");
-include ("./include/user-nav.php");
-include ("./include/right-section.php");
-include ("./include/script.php");
+    <?php
+    include("./include/sidebar.php");
+    include("./include/main.php");
+    include("./include/user-nav.php");
+    include("./include/right-section.php");
+    include("./include/script.php");
 
-?>
+    ?>
