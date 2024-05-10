@@ -54,21 +54,16 @@ if (!isset($_SESSION['role'])) {
         </div>
         <?php
 
-// Get search query and category from the URL
 $searchQuery = isset($_GET['query']) ? $_GET['query'] : '';
 $searchCategory = isset($_GET['category']) ? $_GET['category'] : '';
 
-// Perform search based on the selected category
 switch ($searchCategory) {
     case 'product':
-        // Search for products
         $query = "SELECT `product_id`, `product_name`, `revision_no`, `manufacturing_no`, `category_name` FROM products_table WHERE product_id LIKE '%$searchQuery%' OR product_name LIKE '%$searchQuery%' OR category_name LIKE '%$searchQuery%' OR manufacturing_no LIKE '%$searchQuery%'";
         break;
 
     case 'test':
-        // Search for tests
         // $query = "SELECT `testing_id`, `product_id`, `testing_code`, `testing_roll_number`, `test_result`, `remarks`, `tester_name` FROM testing_records WHERE testing_id LIKE '%$searchQuery%' OR product_id LIKE '%$searchQuery%' OR testing_code LIKE '%$searchQuery%' OR testing_roll_number LIKE '%$searchQuery%' OR test_result LIKE '%$searchQuery%' OR tester_name LIKE '%$searchQuery%'";
-        // Search for tests
 $query = "SELECT tr.`testing_id`, tr.`product_id`, p.`product_name`, tr.`testing_code`, tr.`testing_roll_number`, tr.`test_result`, tr.`remarks`, tr.`tester_name` FROM `testing_records` tr
 JOIN `products_table` p ON tr.`product_id` = p.`product_id`
 WHERE tr.`testing_id` LIKE '%$searchQuery%' OR tr.`product_id` LIKE '%$searchQuery%' OR p.`product_name` LIKE '%$searchQuery%' OR tr.`testing_code` LIKE '%$searchQuery%' OR tr.`testing_roll_number` LIKE '%$searchQuery%' OR tr.`test_result` LIKE '%$searchQuery%' OR tr.`tester_name` LIKE '%$searchQuery%'";
@@ -76,15 +71,12 @@ WHERE tr.`testing_id` LIKE '%$searchQuery%' OR tr.`product_id` LIKE '%$searchQue
         break;
 
     default:
-        // Display an error or default message
         echo "Invalid search category";
-        exit; // exit script if an invalid category is provided
+        exit; 
 }
 
-// Execute the query
 $result = mysqli_query($con, $query);
 
-// Display search results in a table
 echo "<div class='recent-orders'>
         <h2>Search Results</h2>";
 
@@ -120,7 +112,6 @@ if (mysqli_num_rows($result) > 0) {
 
 echo "</div>";
 
-// Modal for each row
 $result = mysqli_query($con, $query); // Reset the result pointer
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='modal fade light-mode ' id='remarksModal{$row['testing_id']}' tabindex='-1' aria-labelledby='remarksModalLabel{$row['testing_id']}' aria-hidden='true'>
