@@ -90,7 +90,7 @@ if (mysqli_num_rows($result) > 0) {
     echo "</tr>
             </thead>
             <tbody>";
-
+// product table and category table doesn't have testing id thats why giving error
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
         foreach ($row as $key => $value) {
