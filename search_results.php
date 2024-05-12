@@ -114,6 +114,8 @@ echo "</div>";
 
 $result = mysqli_query($con, $query); // Reset the result pointer
 while ($row = mysqli_fetch_assoc($result)) {
+    foreach ($row as $key => $value) {
+    if ($key === 'remarks') {
     echo "<div class='modal fade light-mode ' id='remarksModal{$row['testing_id']}' tabindex='-1' aria-labelledby='remarksModalLabel{$row['testing_id']}' aria-hidden='true'>
     <div class='modal-dialog modal-lg'>
         <div class='modal-content'>
@@ -127,6 +129,11 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div>
 </div>";
+    }
+    else {
+        // echo "<td>$value</td>";
+    }
+}
 }
 
 ?>
