@@ -69,7 +69,10 @@ JOIN `products_table` p ON tr.`product_id` = p.`product_id`
 WHERE tr.`testing_id` LIKE '%$searchQuery%' OR tr.`product_id` LIKE '%$searchQuery%' OR p.`product_name` LIKE '%$searchQuery%' OR tr.`testing_code` LIKE '%$searchQuery%' OR tr.`testing_roll_number` LIKE '%$searchQuery%' OR tr.`test_result` LIKE '%$searchQuery%' OR tr.`tester_name` LIKE '%$searchQuery%'";
 
         break;
-
+        case 'category':
+           
+            $query = "SELECT `category_name`, `product_code`, `test_code`, `test_description` FROM `categories` WHERE category_name LIKE '%$searchQuery%' OR product_code LIKE '$searchQuery' OR test_code LIKE '$searchQuery'";
+            break;
     default:
         echo "Invalid search category";
         exit; 
@@ -85,12 +88,13 @@ if (mysqli_num_rows($result) > 0) {
             <thead>
                 <tr>";
     while ($fieldInfo = mysqli_fetch_field($result)) {
-        echo "<th>{$fieldInfo->name}</th>";
+        $fieldName = str_replace("_", " ", $fieldInfo->name);
+        $fieldName = ucwords($fieldName);
+    echo "<th>{$fieldName}</th>";
     }
     echo "</tr>
             </thead>
             <tbody>";
-// product table and category table doesn't have testing id thats why giving error
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
         foreach ($row as $key => $value) {
@@ -100,6 +104,7 @@ if (mysqli_num_rows($result) > 0) {
                       </td>";
             } else {
                 echo "<td>$value</td>";
+                
             }
         }
         echo "</tr>";
