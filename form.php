@@ -25,9 +25,7 @@ if (isset($_POST["addproduct"])) {
     echo "<script>console.log('Product Code: $product_id')</script>";
 
     $product_query = "INSERT INTO `products_table`(`product_id`, `product_name`, `revision_no`, `manufacturing_no`, `category_name`) VALUES ('$product_id','$product_name','$revision_no','$manufacturing_no','$category_name')";
-
     $result = mysqli_query($con, $product_query);
-
     header("Location: index.php");
  
 }
@@ -102,16 +100,12 @@ if(isset($_POST["btnlogin"])) {
     $password = $_POST["password"]; 
     $query = "SELECT * FROM `role` WHERE email = '$email' AND pass = '$password'";
     $res = mysqli_query($con, $query);
-    
     $row = mysqli_fetch_assoc($res);
-    
     $count = mysqli_num_rows($res);
     if ($count > 0) {
         $_SESSION['email'] = $row['email'];
         $_SESSION['password'] = $row['pass'];
         $_SESSION['role'] = $row['role'];
-
-        // Redirect to index.php
         header("Location: index.php");
         exit();
     } else {

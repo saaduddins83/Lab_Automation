@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </script>
 
         <script src="orders.js"></script>
-        <script src="index.js"></script>
+        <script src="function.js"></script>
         </body>
 
         </html>
